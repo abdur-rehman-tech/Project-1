@@ -1,0 +1,115 @@
+.top{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+.muted{ color:#666; margin:6px 0 0; }
+
+.card{
+  background:#fff;
+  border:1px solid #eaeaea;
+  border-radius:16px;
+  padding:14px;
+}
+.form label{ display:block; font-size:13px; margin:10px 0 6px; color:#333; }
+
+.row2{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px;
+}
+.input{
+  width:100%;
+  padding:10px 12px;
+  border:1px solid #e6e6e6;
+  border-radius:12px;
+  outline:none;
+  background:#fff;
+}
+.check{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:10px 0 6px;
+  user-select:none;
+}
+.actions{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
+
+.btn{
+  padding:8px 10px;
+  border-radius:12px;
+  background:#111;
+  border:1px solid #111;
+  color:#fff;
+  cursor:pointer;
+}
+.btn.outline{
+  background:#fff;
+  color:#111;
+}
+.btn.danger{
+  background:#b00020;
+  border-color:#b00020;
+}
+
+.err{ color:#b00020; display:block; margin-top:6px; }
+
+.listTitle{ margin:16px 0 10px; }
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:12px;
+}
+
+.toolCard{
+  background:#fff;
+  border:1px solid #eaeaea;
+  border-radius:16px;
+  padding:14px;
+}
+.cardTop{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+}
+.desc{ margin:10px 0 12px; }
+
+.meta{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+.dot{ width:10px; height:10px; border-radius:50%; display:inline-block; }
+.link{ margin-left:auto; text-decoration:none; color:#111; }
+
+.badge{
+  font-size:12px;
+  padding:4px 8px;
+  border-radius:999px;
+  border:1px solid #e6e6e6;
+}
+.badge.free{ background:#eef7ee; border-color:#cde6cd; }
+.badge.paid{ background:#fff0f0; border-color:#ffd0d0; }
+.badge.freemium{ background:#f1f2ff; border-color:#d6d9ff; }
+
+@media (max-width: 900px){
+  .row2{ grid-template-columns: 1fr; }
+  .grid{ grid-template-columns: 1fr; }
+}
+.empty{
+  margin: 10px 0;
+  padding: 10px 12px;
+  border: 1px dashed #ddd;
+  border-radius: 12px;
+  color: #444;
+  background: #fafafa;
+}

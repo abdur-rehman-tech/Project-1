@@ -1,0 +1,108 @@
+<section class="top">
+  <div>
+    <h1>Admin – Manage Tools</h1>
+    <p class="muted">Add, edit, and delete DevOps tools (Reactive Forms).</p>
+  </div>
+
+  <button class="btn outline" type="button" (click)="reset()">
+    Clear
+  </button>
+</section>
+
+<div *ngIf="loading" class="empty">Working...</div>
+<div *ngIf="errorMsg" class="empty">{{ errorMsg }}</div>
+
+<form class="card form" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="row2">
+    <div>
+      <label>Tool Name</label>
+      <input class="input" placeholder="e.g., Docker" formControlName="name" />
+      <small class="err" *ngIf="name?.touched && name?.invalid">
+        Name is required (min 3).
+      </small>
+    </div>
+
+    <div>
+      <label>Category</label>
+      <input class="input" placeholder="e.g., CI/CD" formControlName="category" />
+      <small class="err" *ngIf="category?.touched && category?.invalid">
+        Category is required.
+      </small>
+    </div>
+  </div>
+
+  <div class="row2">
+    <div>
+      <label>Pricing</label>
+      <select class="input" formControlName="pricing">
+        <option value="">Select</option>
+        <option>Free</option>
+        <option>Paid</option>
+        <option>Freemium</option>
+      </select>
+      <small class="err" *ngIf="pricing?.touched && pricing?.invalid">
+        Pricing is required.
+      </small>
+    </div>
+
+    <div>
+      <label>Website</label>
+      <input class="input" placeholder="https://..." formControlName="website" />
+      <small class="err" *ngIf="website?.touched && website?.invalid">
+        Valid URL required (http/https).
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <label>Description</label>
+    <textarea class="input" rows="3" placeholder="Write a short description..." formControlName="description"></textarea>
+    <small class="err" *ngIf="description?.touched && description?.invalid">
+      Description required (min 10).
+    </small>
+  </div>
+  <div>
+    <label>Tags (comma separated)</label>
+    <input class="input" placeholder="e.g., cicd, automation, cloud" formControlName="tagsText" />
+  </div>
+
+  <label class="check">
+    <input type="checkbox" formControlName="popular" />
+    Mark as popular
+  </label>
+
+  <div class="actions">
+    <button class="btn" type="submit" [disabled]="loading">
+      {{ editingId ? 'Update Tool' : 'Add Tool' }}
+    </button>
+    <button class="btn outline" type="button" (click)="reset()">Cancel</button>
+  </div>
+</form>
+
+<h2 class="listTitle">Current Tools</h2>
+
+<div class="grid">
+  <article class="toolCard" *ngFor="let t of tools">
+    <div class="cardTop">
+      <div>
+        <h3>{{ t.name }}</h3>
+        <p class="muted">{{ t.category }}</p>
+      </div>
+
+      <span [ngClass]="badgeClass(t.pricing)">{{ t.pricing }}</span>
+    </div>
+
+    <p class="desc">{{ t.description }}</p>
+
+    <div class="meta">
+      <span class="dot" [ngStyle]="{ background: t.popular ? '#111' : '#bbb' }"></span>
+      <span class="muted">{{ t.popular ? 'Popular' : 'Normal' }}</span>
+      <a class="link" [href]="t.website" target="_blank">Website</a>
+    </div>
+
+    <div class="actions">
+      <button class="btn outline" type="button" (click)="edit(t)">Edit</button>
+      <button class="btn danger" type="button" (click)="removeTool(t.id)" [disabled]="loading">Delete</button>
+    </div>
+  </article>
+</div>

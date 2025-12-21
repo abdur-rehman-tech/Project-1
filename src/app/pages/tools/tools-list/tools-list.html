@@ -1,0 +1,61 @@
+<section class="top">
+  <div>
+    <h1>Tools Directory</h1>
+    <p class="muted">Search, filter and open tool details.</p>
+  </div>
+
+  <button class="btn outline" (click)="clearFilters()">Clear</button>
+</section>
+
+<section class="filters">
+  <input
+    class="input"
+    placeholder="Search by name, tag, description..."
+    [(ngModel)]="search"
+  />
+
+  <select class="input" [(ngModel)]="category">
+    <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+  </select>
+
+  <label class="check">
+    <input type="checkbox" [(ngModel)]="onlyPopular" />
+    Popular only
+  </label>
+</section>
+
+<!-- ngIf -->
+<div *ngIf="filteredTools.length === 0" class="empty">
+  No tools found. Try a different search.
+</div>
+
+<!-- ngFor cards -->
+<div class="grid">
+  <article
+    class="card"
+    *ngFor="let t of filteredTools"
+    [ngStyle]="{ borderColor: t.popular ? '#111' : '#eaeaea' }"
+  >
+    <div class="cardTop">
+      <h3>{{ t.name }}</h3>
+
+      <!-- ngClass -->
+      <span [ngClass]="badgeClass(t.pricing)">
+        {{ t.pricing }}
+      </span>
+    </div>
+
+    <p class="muted">{{ t.category }}</p>
+    <p class="desc">{{ t.description }}</p>
+
+    <div class="tags">
+      <span class="tag" *ngFor="let tag of t.tags">#{{ tag }}</span>
+    </div>
+
+    <div class="actions">
+      <!-- route param -->
+      <a class="btn" [routerLink]="['/tools', t.id]">View Details</a>
+      <a class="btn outline" [href]="t.website" target="_blank">Website</a>
+    </div>
+  </article>
+</div>

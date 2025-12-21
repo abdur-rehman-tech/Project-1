@@ -1,0 +1,35 @@
+<section class="wrap">
+  <div class="card">
+    <h1>Login</h1>
+    <p class="muted">Use: <b>admin@test.com</b> / <b>123456</b></p>
+
+    <form [formGroup]="form" (ngSubmit)="login()">
+      <label>Email</label>
+      <input class="input" placeholder="admin@test.com" formControlName="email" />
+      <small class="err" *ngIf="email?.touched && email?.invalid">
+        Enter a valid email.
+      </small>
+
+      <label>Password</label>
+      <input class="input" type="password" placeholder="min 6 chars" formControlName="password" />
+      <small class="err" *ngIf="password?.touched && password?.invalid">
+        Password is required (min 6).
+      </small>
+
+      <button class="btn" type="submit" [disabled]="loading">
+        {{ loading ? 'Signing in...' : 'Login' }}
+      </button>
+
+      <button class="btn outline" type="button" (click)="logout()">
+        Logout
+      </button>
+
+      <p class="ok" *ngIf="successMsg">{{ successMsg }}</p>
+      <p class="bad" *ngIf="errorMsg">{{ errorMsg }}</p>
+    </form>
+
+    <div class="hint">
+      <a routerLink="/tools">Back to Tools</a>
+    </div>
+  </div>
+</section>
